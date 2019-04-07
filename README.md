@@ -1,3 +1,7 @@
+# Thesis
+
+Cloned from https://github.com/OEP/uathesis at commit 4934e13 made on April 29, 2017. This template has been heavily modified to fit my needs.
+
 # The University of Alabama Thesis Template
 
 This is a LaTeX template for students writing a thesis at The University of
