@@ -1,0 +1,26 @@
+\chapter{Example MC Run Cards}\label{ch:appendix_run_card}
+
+The following sections contain example run cards, each called \textit{Run.dat}, used to configure the MC event generator \SHERPA~v.2.1.1 for use in modeling the signal and background needed for this analysis. Particles are specified using the PDG ID code numbering scheme, as described in Section~43 of Ref.~\cite{Tanabashi:2018oca}. Photons correspond to the PDG ID code 22. The proton beams are specified using the PDG ID code 2212 and are set to $\sqrt{s} = 13\TeV$. The PDG ID code 21 corresponds to gluons, and \SHERPA uses an internal code of 93 to indicate particles in its jet container.
+
+\section{Higher Order SM Background Run Card}\label{sec:SM_run_card}
+
+The following run card is used to configure \SHERPA for generation of the higher order SM background used for the real background calculation, as described in Section~\ref{sec:real_background}. The box process is calculated with an internal loop generator using a variable scale to set both the renormalization and factorization scales to the diphoton invariant mass. The Born process includes up to three additional jets in its final state and uses a 20\GeV scale for the ME\texttt{+}PS merging scheme. This example configuration uses the following kinematic selection: photon $\pt>50\GeV$, photon $|\eta|<2.8$, and $60 < \Mgg < 200\GeV$.
+
+\pagebreak
+\VerbatimInput{inc/Run.dat_GGJets}
+
+
+\pagebreak
+\section{An ADD Signal Run Card}\label{ch:ADD_run_card}
+
+This run card is used to configure \SHERPA for generation of the ADD signal, as described in Chapter~\ref{ch:signal}. In this example configuration, the signal model parameters $\KK=1$, $\nED =4$, and $\Ms = 3500\GeV$ are specified. The kinematic selection of $\pt>70\GeV$ and $|\eta|<2.8$ is imposed for photons and \Mgg is restricted to be between 1000-2000\GeV. 
+
+\VerbatimInput{inc/Run.dat_ADDGravitonToDiPhoton_MS3500_NED4_KK1_M-1000To2000_13TeV-sherpa.txt}
+
+
+\pagebreak
+\section{Leading Order SM Background Run Card}\label{ch:LO_SM_run_card}
+
+The below run card is used to configure \SHERPA for generation of the LO SM background, which is used with the LO ADD\texttt{+}SM signal samples in order to extract the ADD signal with interference samples, as described in Chapter~\ref{ch:signal}. This run card is identical to the one used to produce the corresponding ADD signal, such as the one shown above in Appendix~\ref{ch:ADD_run_card}, but has the model section removed. This example configuration restricts \Mgg between 500-1000\GeV.
+
+\VerbatimInput{inc/Run.dat_SMForADDGravitonToDiPhoton_M-500To1000_13TeV-sherpa}

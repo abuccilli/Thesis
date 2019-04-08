@@ -1,0 +1,168 @@
+%%
+%% THESIS/DISSERTATION TEMPLATE FOR THE UNIVERSITY OF ALABAMA.
+%%
+%% This example is written by Paul Kilgo. It highlights all the (few) features
+%% of uathesis.cls
+%%
+%% Modified by Andrew Buccilli
+%% from https://github.com/OEP/uathesis
+%% using commit 4934e13 from April 29, 2017
+
+
+%% Use one of the following if writing a thesis/dissertation.
+%\documentclass[thesis]{uathesis}
+\documentclass[dissertation]{uathesis}
+
+\usepackage{graphicx,subfigure}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[sort&compress,numbers]{natbib}
+\usepackage{setspace}
+\usepackage{xspace}
+\usepackage{multirow}
+\usepackage{amsmath}
+\allowdisplaybreaks
+\usepackage{slashed}
+\usepackage{notoccite}
+%\usepackage{indentfirst}
+%\usepackage[displaymath, mathlines]{lineno}
+%\linenumbers
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyvrb}
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}
+{fontsize=\footnotesize,
+ frame=lines,
+ framesep=2em,
+ rulecolor=\color{Gray},
+ label=\fbox{\color{Black}Run.dat},
+ labelposition=topline,
+}
+\usepackage[nottoc]{tocbibind}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%% Includes
+\newcommand{\TODO}[1]{{\bf (TODO: #1)}}
+%\newcommand{\TODO}[1]{}
+%\newcommand{\correction}[1]{\textbf{\textcolor{red}{#1}}}
+\newcommand{\correction}[1]{#1}
+%\newcommand{\correctionTwo}[1]{\textbf{\textcolor{red}{#1}}}
+\input{user-definitions.sty}
+
+\providecommand{\cmsTable}[1]{\resizebox{\textwidth}{!}{#1}}
+\newlength\cmsTabSkip\setlength{\cmsTabSkip}{1ex}
+
+\usepackage[titletoc]{appendix}
+
+%% Required parameters (variables removed to confirm proper spacing)
+\author{Andrew Thomas Buccilli}
+\adviser{Conor Henderson}
+
+%% The people on your committee.
+%% Use \and to break them up between lines.
+\committee{
+  Nobuchika Okada \hfill \and
+  Toyoko Orimoto \hfill \and
+  Andreas Piepke \hfill \and
+  Paolo Rumerio \hfill \and
+  Dawn R. Williams \hfill \and
+}
+
+%% Note the use of \and to create line breaks and the
+%% inverted pyramid style requested by the graduate school.
+\title{Search for signatures of large extra dimensions in high-mass \hfill\and \hfill\and
+  diphoton events from proton-proton collisions \hfill \and \hfill\and
+  at $\sqrt{s} = 13\TeV$ with CMS\hfill\and}
+
+\degree{Doctor of Philosophy} 
+\department{Physics and Astronomy}
+
+\abstract{
+  A search is performed for a nonresonant excess of high-mass diphoton events over the Standard Model background prediction. This type of excess could be a signature of new physics, such as from the existence of extra spatial dimensions in the universe. The presence of these extra dimensions could modify the fundamental scale of gravity in such a way as to solve the Standard Model hierarchy problem. The sample of diphoton events were produced from proton-proton collisions using the Large Hadron Collider at a center-of-mass energy of 13\TeV. The data correspond to an integrated luminosity of 35.9\fbinv and were recorded in 2016 with the CMS detector. The dominant, irreducible diphoton background comes from Standard Model diphoton production and is determined using a next-to-next-to-leading order Monte Carlo calculation. The subdominant, reducible photon\texttt{+}jet and dijet backgrounds arise when a jet fakes a photon signature in the detector and one or two become misidentified as photons. A technique using control samples in data is used to estimate this contribution. The data are consistent with the background-only hypothesis and the results are interpreted in the context of the large extra-dimensional model of Arkani-Hamed, Dimopoulos, and Dvali. At 95\% confidence level, lower exclusion limits are set on the string mass scale \Ms ranging from 5.6 to 9.7\TeV, depending on the model parameters. This result provides the current most stringent limits on searches for large extra dimensions in the diphoton channel.
+}
+
+\dedication{
+  {\centering
+    \textit{To my father} \par
+  }
+}
+
+\acknowledgments{
+  Writing this dissertation has been a time of reflection. During the past six years, graduate school has been an enormous period of growth. This dissertation would not have happened without the help, support, guidance, and encouragement of so many people. Friends, family, teachers, mentors, officemates, roommates, and collaborators have all had an impact.
+
+  Having the right advisor is essential. I could not have asked for a better advisor with Conor Henderson. He is always available for his students and constantly devotes an immense amount of time for them, caring deeply about their success. I have come a long way under his guidance and am grateful for his patience, clear explanations, superb mentoring, and camaraderie. As his first graduate student, it has been a pleasure helping him build the Alabama CMS group.
+
+  I thank each of the Alabama CMS group members Paolo Rumerio, Otman Charaf, Chris West, and Seth Cooper, all constantly offering support in various ways, especially near the beginning. My friends, officemates, fellow graduate students, professors, and colleagues at Alabama have made my time here enjoyable. I also thank my other dissertation committee members Nobuchika Okada, Toyoko Orimoto, Andreas Piepke, and Dawn Williams for their willingness to serve and accommodate, as well as for their assistance during the past three years, providing constructive feedback along the way.
+
+  Spending time at CERN was crucial for my growth as a Ph.D.~student and was, arguably, the most important thing I did during this time for both my personal development and dissertation research. I thank my CERN officemates John Hakala, Martin Kwok, and David Yu for their friendship, computing help, and physics discussions. The list of friends I made while at CERN is vast. Jared Sturdy and Brian Dorney are among them. The XESMP and YALT crews taught me to take a break regardless of how demanding things were.
+
+  Josh Kunkle was a tremendous help and mentor on everything HCAL. While I was an HCAL DOC, his assistance was vital, and necessary, for smooth operation, especially during the frequent 4 a.m.~phone calls. There are many people within HCAL Operations, DPG, and PFG who have assisted along the way. I thank Pawel de Barbaro, Andrea Benaglia, Mario Galanti, Jae Hyeok Yoo, Lucien Lo, Aram Apyan, Rohan Bhandari, Danny Noonan, Viktor Khristenko, Ted Laird, Federico De Guio, Halil Saka, Dick Kellogg, and others.
+
+  There are countless people within CMS who have made this research possible. I thank the Rutgers CMS members John Paul Chou, Antonios Agapitos, and Steve Kaplan for their close collaboration with the diphoton analysis during the last three years. Working on the analysis combination with Simone Pigazzini was smooth thanks to his eagerness to advance it. I thank Pasquale Musella for his help in the early stages of the Run 2 diphoton analysis, especially during our time commissioning and tuning the photon ID. I also thank David Sheffield and Saptaparna Bhattacharya for their prolonged assistance with our Monte Carlo samples. The numerous EXO and EXO Non-Hadronic conveners provided constructive and timely feedback on the analysis throughout its duration. Our ARC was invaluable in ushering along the analysis in its latter stages. Our ARC Chair, Si Xie, made the joint coordination process easy during my time as Analysis Contact. Several internal reviewers and institutes helped polish the analysis as it became publication ready.
+
+  Finally, I thank my family. Dad and Mom have made me who I am today, and my brothers Chris, David, and Danny have always been there along the way. I thank my parents-in-law Zhoushun and Wenying for their support. My deepest thanks go to my wife Lijuan. Without her sacrifice, love, and encouragement, this would not have been possible.
+
+  \correction{This work was supported in part by DOE grant \#DE-SC0012447.}
+}
+
+\university{The University of Alabama}
+%\school{Graduate School}
+%\gradyear{\the\year}
+\gradyear{2019} % year of graduation, not submission of dissertation
+\place{Tuscaloosa, Alabama}
+
+
+\begin{document}
+
+\makefrontmatter
+
+\begin{body}
+
+\hypersetup{pageanchor=false}
+\include{intro}
+\hypersetup{pageanchor=true}
+
+\include{experiment}
+
+\include{event_selection}
+
+\include{background}
+
+\include{signal}
+
+\include{systematics}
+
+\include{results}
+
+\include{conclusion}
+
+\renewcommand{\bibsection}{\topskip=32pt\chapter*{References}\topskip=0pt \addcontentsline{toc}{chapter}{References}\vspace*{6pt}}
+
+\bibliographystyle{lucas_unsrt}
+
+\begingroup
+\setstretch{1.0}
+\bibliography{thesis}
+\endgroup
+
+\begin{appendices}
+
+\addtocontents{toc}{\setlength{\cftchapnumwidth}{14.4pt}}
+\renewcommand{\appendixname}{Appendix}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchappresnum}{}}
+
+\include{appendix_a}
+
+\include{appendix_b}
+
+\end{appendices}
+
+\end{body}
+\end{document}

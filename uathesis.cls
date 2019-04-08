@@ -25,6 +25,9 @@
 % reporting should also be done through Github as well.
 %
 % Happy writing!
+%
+%
+% Modified by Andrew Buccilli
 
 \NeedsTeXFormat{LaTeX2e}
 
@@ -40,41 +43,35 @@
   \PassOptionsToClass{\CurrentOption}{report}%
 }
 \ProcessOptions\relax
-\LoadClass[letter,12pt]{report}
+\LoadClass[12pt]{report}
 
-% margins
+%\usepackage[top=1in,bottom=1in,left=1in,right=1in,showframe]{geometry}
 \usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+
 \usepackage{titlesec}
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
+\titlespacing*{\chapter}{0pt}{28pt}{40pt}
+
 \usepackage{setspace}
 \usepackage{textcase}
-\usepackage{tocloft}
-\usepackage[nonumberlist,xindy,toc,nopostdot,nogroupskip]{glossaries}
-\usepackage{glossary-longragged}
-\setlength{\glsdescwidth}{1.25\textwidth}%
-\setglossarystyle{longragged}
+\usepackage[subfigure]{tocloft}
 
-\renewcommand{\glossaryname}{LIST OF ABBREVIATIONS AND SYMBOLS}
-
-\renewcommand{\cfttoctitlefont}{\pagebreak\vspace*{1in}\hspace{.43\linewidth}\MakeTextUppercase}
-\renewcommand{\cftaftertoctitle}{\hfill}
-\renewcommand{\cftchapfont}{ }
 \renewcommand{\cftdot}{.}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
-\renewcommand{\cftchappagefont}{}
-\renewcommand\cftchappresnum{CHAPTER }
-\cftsetindents{chapter}{0em}{6.5em}
+\renewcommand\cftchappresnum{Chapter }
+\newlength\mylen
+\settowidth\mylen{\bfseries Chapter 1\ }
+\addtolength{\mylen}{0pt}
+\cftsetindents{chap}{0pt}{\mylen}
 \setlength{\cftbeforechapskip}{0pt}
 
-\renewcommand{\contentsname}{\textbf{CONTENTS}}
+\setlength\cftbeforefigskip{12pt}
+\setlength\cftbeforetabskip{12pt}
 
-\renewcommand{\cftloftitlefont}{\pagebreak\hfill\MakeTextUppercase}
-\renewcommand{\cftafterloftitle}{\hfill}
-
-\renewcommand{\cftlottitlefont}{\pagebreak\hfill\MakeTextUppercase}
-\renewcommand{\cftafterlottitle}{\hfill}
-
-%% Title spacings.
-\titlespacing{\chapter}{0pt}{2in}{1in}
+\renewcommand\cftbeforetoctitleskip{56pt}
+\renewcommand\cftbeforeloftitleskip{59.5pt}
+\renewcommand\cftbeforelottitleskip{59.5pt}
 
 %% Thesis committee
 \newcommand\committee[1]{\renewcommand\@committee{#1}}
@@ -97,8 +94,8 @@
 \newcommand\@department{Undefined Department}
 
 %% School (in case of undergrad thesis or something)
-\newcommand\school[1]{\renewcommand\@school{#1}}
-\newcommand\@school{Graduate School}
+%\newcommand\school[1]{\renewcommand\@school{#1}}
+%\newcommand\@school{Graduate School}
 
 %% Year of graduation
 \newcommand\gradyear[1]{\renewcommand\@gradyear{#1}}
@@ -123,28 +120,32 @@
 %% Rename bibliography
 \renewcommand{\bibname}{References}
 
-%% Do not add vspace between chapters
-%% Hack taken from:
-%% http://tex.stackexchange.com
-%% /questions/784/how-to-change-the-line-spacing-in-my-list-of-figures
 \newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}}
 \addtocontents{lof}{\protect\noaddvspace}
 \addtocontents{lot}{\protect\noaddvspace}
 
-% Make the front matter...
-\newcommand{\makefrontmatter}{
+\newcommand{\makefrontmatter}
+{
   \thispagestyle{empty}
-  \vspace*{50\p@}
-  \begin{center}
-    \begin{doublespace}
+  {\centering
+    \singlespacing
     \renewcommand{\and}{\NoCaseChange{\\}}
-    \MakeTextUppercase{\@title} \linebreak \linebreak
-    by \linebreak
-    \MakeTextUppercase{\@author}
-    \begin{singlespace}
-      \MakeTextUppercase{\@adviser, Committee Chair \and \@committee}
-    \end{singlespace}
-    
+
+    \vspace*{-18pt}
+    \vspace*{1in}
+    \MakeTextUppercase{\@title}
+
+    \hfill \linebreak
+    \hfill \linebreak
+    \hfill \linebreak
+    by
+    \hfill \linebreak
+
+    \MakeTextUppercase{\@author} \hfill \linebreak
+
+    \MakeTextUppercase{\@adviser, Committee Chair \hfill \and \@committee}  
+    \hfill \linebreak
+    \hfill \linebreak
     \hfill \linebreak
     \ifthesis
       A THESIS
@@ -152,114 +153,87 @@
       A DISSERTATION
     \fi
     \hfill \linebreak
-    \begin{singlespace}
-	  Submitted in partial fulfillment of the requirements \\
-      for the degree of \@degree \\
-      in the Department of \@department \\
-      in the \@school\,of \\
+    \hfill \linebreak
+    \hfill \linebreak
+    \hfill \linebreak
+	    Submitted in partial fulfillment of the requirements \hfill \\
+      for the degree of \@degree \hfill \\
+      in the Department of \@department \hfill \\
+      in the Graduate School of \hfill \\
       \@university
-    \end{singlespace}
 	\hfill \linebreak
+  \hfill \linebreak
+  \hfill \linebreak
+
 	\hfill \linebreak
-	\MakeTextUppercase{\@place}
-	\hfill \linebreak
-	\hfill \linebreak
-	\@gradyear
-  \end{doublespace}
-  \end{center}
+
+	\MakeTextUppercase{\@place} \hfill \linebreak
+    \hfill \linebreak
+   \hfill \linebreak
+   \hfill \linebreak
+	\@gradyear \hfill \linebreak
+  \par
+  \vspace*{-12pt}
+  }
+
+\pagebreak
+
+    
+\begin{frontmatter}
+  \chapter*{\textbf{Abstract}}
+  \addcontentsline{toc}{chapter}{Abstract}
+  \@abstract
+
+  \chapter*{\textbf{Dedication}}
+  \addcontentsline{toc}{chapter}{Dedication} 
+  \@dedication
+
+  \chapter*{\textbf{Acknowledgments}}
+  \addcontentsline{toc}{chapter}{Acknowledgments}
+  \@acknowledgments
+
+  \pagebreak
+  \tableofcontents
+
   \pagebreak
 
-    \begin{frontmatter}
-
-\topskip=1in
-    \chapter*{\textbf{ABSTRACT}}
-    \addcontentsline{toc}{chapter}{ABSTRACT}
-\topskip=-1in
-
-    \@abstract
-    
-\topskip=1in
-    \chapter*{\textbf{DEDICATION}}
-    \addcontentsline{toc}{chapter}{DEDICATION} 
-    \topskip=-1in
-    \@dedication
-%\pagebreak
-\renewcommand{\glossarypreamble}{\topskip=-1in}
-\topskip=1in
-    %% Print everything in the glossary.
-    \glsaddall
-    \printglossary[toctitle={LIST OF ABBREVIATIONS AND SYMBOLS},title={\textbf{LIST OF ABBREVIATIONS AND SYMBOLS}}]
-    \glsresetall
-
-
-    \chapter*{\textbf{ACKNOWLEDGMENTS}}
-    \addcontentsline{toc}{chapter}{ACKNOWLEDGMENTS}
-
-    \@acknowledgments
-\topskip=-1in
-    %% ToC entries have double spaced but only longer-than-1-lines have single space.
-    \renewcommand\cftchapafterpnum{\vskip12pt}
-    \renewcommand\cftsecafterpnum{\vskip12pt}
-    \renewcommand\cftsubsecafterpnum{\vskip12pt}
-    \begin{spacing}{1}
-      \tableofcontents
-    \end{spacing}
-
-\renewcommand{\listtablename}{\textbf{LIST OF TABLES}}
-        \begin{spacing}{1}
-\renewcommand{\cftlottitlefont}{\vspace*{0in}\hspace{.40\linewidth}\MakeTextUppercase}  
-\pagebreak
-\addcontentsline{toc}{chapter}{LIST OF TABLES}
+  \begin{singlespace}
     \listoftables 
-    \end{spacing}
-     
-
-		\renewcommand{\listfigurename}{\textbf{LIST OF FIGURES}}
-\renewcommand{\cftloftitlefont}{\vspace*{0in}\hspace{.40\linewidth}\MakeTextUppercase}  
-\pagebreak
-\addcontentsline{toc}{chapter}{LIST OF FIGURES}
-\begin{spacing}{1}
-\listoffigures
-\end{spacing}
-
-    \end{frontmatter}
+  \end{singlespace}
+ 
+  \pagebreak
+  \begin{singlespace}
+    \listoffigures
+  \end{singlespace}
+\end{frontmatter}
 
 }
   
-\newcommand{\makecopyright}{
+\newcommand{\makecopyright}
+{
   \thispagestyle{empty}
-  \singlespacing
-  \null \vfill
-  \begin{center}
-    Copyright \@author\,\@gradyear \\
-    ALL RIGHTS RESERVED
-  \end{center}
+  \begin{singlespace}
+  \vspace*{\fill}
+  {\centering
+    Copyright Andrew Thomas Buccilli 2019 \hfill\\
+    ALL RIGHTS RESERVED \par
+  }
+  \end{singlespace}
 }
 
-
-\newenvironment{frontmatter}{
+\newenvironment{frontmatter}
+{
   \makecopyright
   \pagebreak
   \pagenumbering{roman}
   \setcounter{page}{2}
   \setcounter{chapter}{0}
   \begin{doublespace}
-  \renewcommand{\@makechapterhead}[1]
-  {
-    \begin{center}
-      \MakeTextUppercase{ ##1 }
-    \end{center}
-  }
-  \renewcommand{\@makeschapterhead}[1]
-  {
-    \begin{center}
-      \MakeTextUppercase{ ##1 }
-    \end{center}
-  }
 }
 {
-    \end{doublespace}
+  \end{doublespace}
 }
+
 \newenvironment{body}
 {
   \pagebreak
@@ -267,37 +241,9 @@
   \setcounter{page}{1}
   \setcounter{chapter}{0}
   \begin{doublespace}
-  \renewcommand{\@makechapterhead}[2]
-  {
-    \vspace*{50\p@}%
-    \begin{center}
-      \MakeTextUppercase{ \textbf{ \@chapapp\space \thechapter } }
-      \linebreak
-      \begin{spacing}{1}
-      \MakeTextUppercase{ \textbf{ ##1 } }
-      \end{spacing}
-    \end{center}
-  }
-  
-  \renewcommand{\@makeschapterhead}[1]
-  {
-    \begin{center}
-      \MakeTextUppercase{ \textbf{ ##1 } }
-    \end{center}
-  }
-  
-  \renewcommand{\section}
-  {
-    \@startsection{section}{1}{0mm}{4ex}{2ex}{\normalsize\bfseries}
-  }
-  
-  \renewcommand{\subsection}
-  {
-    \@startsection{subsection}{1}{0mm}{1mm}{1mm}{\normalsize\bfseries}
-  }
 }
 {
   \end{doublespace}
 }
 
-\makeglossaries
+%\makeglossaries
