@@ -1,6 +1,8 @@
 # Thesis
 
-Cloned from https://github.com/OEP/uathesis at commit 4934e13 made on April 29, 2017. This template has been heavily modified to fit my needs.
+Cloned from https://github.com/OEP/uathesis at commit `4934e13` made on April 29, 2017. This template has been heavily modified to fit my needs.
+
+This dissertation is available on the CERN Document Server at [CERN-THESIS-2018-263](http://cds.cern.ch/record/2668304).
 
 # The University of Alabama Thesis Template
 
